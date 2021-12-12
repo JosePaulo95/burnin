@@ -8,7 +8,6 @@ let beep_audios = [];
 beep_audios["grab"] = new Audio('audio/kenney_interfacesounds/Audio/select_002.ogg');
 beep_audios["click"] = new Audio('audio/kenney_interfacesounds/Audio/click_003.ogg');
 beep_audios["scratch"] = new Audio('audio/kenney_interfacesounds/Audio/scratch_004.ogg');
-beep_audios["ipanema"] = new Audio('audio/music/ipanema.ogg');
 
 let AudioController = {
 	playSound: function (index) {
@@ -22,11 +21,7 @@ let AudioController = {
 		bg_audios.map(a => a.pause())
 	},
 	playBeep: function (key) {
-		if(key == "ipanema"){	
-			beep_audios[key].volume = 1
-		}else{
-			beep_audios[key].volume = 0.1
-		}
+		beep_audios[key].volume = 1
 		beep_audios[key].play();
 	},
 }

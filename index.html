@@ -14,46 +14,7 @@
 					<div class="container has-text-centered">
 						<div class="column is-4 is-offset-4">
 							<div class="main-container">
-								<div class="h-50 is-black is-centered">
-									<figure>
-										<img class="full-height" :src="imagens_src[index_capitulo]">
-									</figure>
-								</div>
-								<div id="#panel" class="h-50 is-black bordered-top" v-on:click="run()">
-									<div v-if="content.length == 0" class="section section-capa" v-on:click="start()">
-										<h1>Jobin</h1>
-										<p>[Use o mouse e a barra de espaço para jogar]</p>
-									</div>
 
-									<div v-else class="section section-capitular">
-										<h1>{{content[0].titulo}}</h1>
-										<h2>{{content[0].subtitulo}}</h2>
-									</div>
-
-									<div class="has-text-left section-corrido">
-										<div v-for="(bloco, index) in content.slice(1)">
-											<div v-if="bloco.tipo == undefined" class="bloco-fala">
-												<p class="has-text-weight-bold">{{bloco.autor.toUpperCase()}}</p>
-												<div v-for="row in bloco.fala.split('\n')">
-													<p>{{row}}</p>
-												</div>
-											</div>
-											<div v-else-if="bloco.tipo == 'narracao'" class="bloco-fala">
-												<div>
-													<p>({{bloco.fala}})</p>
-												</div>
-											</div>
-											<div v-else-if="bloco.tipo == 'escolha-fala'" class="bloco-escolha">
-												<p
-													v-for="index_opcao in bloco.index_opcoes"
-													v-on:click="escolhe(index_opcao)"
-												>
-													&nbsp;- {{Capitulo[index_opcao].fala}}
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
 							</div>
 						</div>
 					</div>
@@ -61,19 +22,11 @@
 			</section>
 		</div>
 
-		
+
 		<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.0/anime.min.js"></script>
 
 		<script src="js/audioController.js"></script>
-
-		<script src="uTests/check.js"></script>
-		<script src="uTests/ublocos.js"></script>
-
-		<script src="data/prologo.js"></script>
-		<script src="data/capitulo1.js"></script>
-		<script src="data/capitulo2.js"></script>
-		<script src="data/creditos.js"></script>
 
 		<script src="js/main.js"></script>
 	</body>
