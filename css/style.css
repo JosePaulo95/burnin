@@ -3,3 +3,41 @@
   background-color: purple;
   padding: 1%;
 }
+
+.centralizer-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  min-height: 100vh;
+}
+
+.portrait-container {
+  background-color: purple;
+  min-height: 70vh;
+  min-width: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+
+.horizontal-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.vertical-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.size-1 {flex: 1 }
+.size-2 {flex: 2 }
+.size-3 {flex: 3 }
+.size-4 {flex: 4 }
+.size-5 {flex: 5 }
+.size-6 {flex: 6 }
+.size-7 {flex: 7 }
+.size-8 {flex: 8 }
+.size-9 {flex: 9 }
+.size-10 {flex: 10 }
