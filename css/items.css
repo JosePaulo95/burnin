@@ -32,15 +32,13 @@
 
 .money-discount-bar {
   width: 100%;
-  height: 10%;
   background-color: rgb(220,80,80);
 }
 .money-liquid-amount-bar {
   width: 100%;
-  height: 70%;
   background-color: gold;
+  border-radius: 0 0 5px 5px;
 }
-
 .shop-container {
   align-items: center;
   justify-content: space-evenly;

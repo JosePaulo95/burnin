@@ -6,6 +6,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/items.css">
+		<link rel="stylesheet" type="text/css" href="css/sizes.css">
 		<link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
 	</head>
 	<body>
@@ -24,8 +25,8 @@
 						<div class="size-1 centralizer-container" style="background-color: rgb(30,30,50);">
 							<!-- money bar -->
 							<div class="vertical-container elm-money-bar">
-								<div class="money-discount-bar"></div>
-								<div class="money-liquid-amount-bar"></div>
+								<div :class="'money-discount-bar h-'+getDiscountPercentage">{{money_discount}}</div>
+								<div :class="'money-liquid-amount-bar h-'+getLiquidPercentage">{{money_amount}}</div>
 							</div>
 						</div>
 						<!-- container workers,shop -->
