@@ -7,6 +7,7 @@
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<link rel="stylesheet" type="text/css" href="css/items.css">
 		<link rel="stylesheet" type="text/css" href="css/sizes.css">
+		<link rel="stylesheet" type="text/css" href="css/money-bar.css">
 		<link rel="stylesheet" href="https://unpkg.com/bulma@0.9.0/css/bulma.min.css" />
 	</head>
 	<body>
@@ -25,7 +26,8 @@
 						<div class="size-1 centralizer-container" style="background-color: rgb(30,30,50);">
 							<!-- money bar -->
 							<div class="vertical-container elm-money-bar">
-								<!--<div :class="'money-discount-bar h-'+getDiscountPercentage">{{money_discount}}</div>-->
+								<div :class="'money-exceeded-discount-bar h-'+getExceededDiscountPercentage">{{money_discount}}</div>
+								<div :class="'money-to-be-discounted-bar h-'+getDiscountPartPercentage">{{money_discount}}</div>
 								<div :class="'money-liquid-amount-bar h-'+getLiquidPercentage">{{money_amount}}</div>
 							</div>
 						</div>
@@ -45,7 +47,11 @@
 										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
 									</div>
 									<!-- coin icon -->
-									<img style="width: 5vh; height: 5vh;" src="https://cdn-icons-png.flaticon.com/512/217/217853.png">
+									<img
+										style="width: 5vh; height: 5vh;"
+										src="https://cdn-icons-png.flaticon.com/512/217/217853.png"
+										v-on:click="redeem_money()"
+									>
 								</div>
 								<!-- worker -->
 								<div class="horizontal-container worker-container">
