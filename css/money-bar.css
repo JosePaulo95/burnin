@@ -10,7 +10,7 @@
 }
 .money-exceeded-discount-bar {
   width: 100%;
-  background-color: rgb(220,80,80);
+  background-color: red;
 }
 .money-to-be-discounted-bar {
   width: 100%;

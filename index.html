@@ -26,9 +26,9 @@
 						<div class="size-1 centralizer-container" style="background-color: rgb(30,30,50);">
 							<!-- money bar -->
 							<div class="vertical-container elm-money-bar">
-								<div :class="'money-exceeded-discount-bar h-'+getExceededDiscountPercentage">{{money_discount}}</div>
-								<div :class="'money-to-be-discounted-bar h-'+getDiscountPartPercentage">{{money_discount}}</div>
-								<div :class="'money-liquid-amount-bar h-'+getLiquidPercentage">{{money_amount}}</div>
+								<div :class="'money-exceeded-discount-bar h-'+getExceededDiscountPercentage">{{getExceededDiscountPercentage}}</div>
+								<div :class="'money-to-be-discounted-bar h-'+getDiscountPartPercentage">{{getDiscountPartPercentage}}</div>
+								<div :class="'money-liquid-amount-bar h-'+getLiquidPercentage">{{getLiquidPercentage}}</div>
 							</div>
 						</div>
 						<!-- container workers,shop -->
