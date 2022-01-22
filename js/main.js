@@ -15,7 +15,8 @@ var App = new Vue({
   },
   computed: {
     getLiquidPercentage(){
-      let liquid = (this.money_amount-this.money_discount)/this.money_goal*100
+      //let liquid = (this.money_amount-this.money_discount)/this.money_goal*100
+      let liquid = this.money_amount/this.money_goal*100
       liquid = Math.floor(liquid)
       liquid = Math.min(100, liquid)
       liquid = Math.max(0, liquid)
