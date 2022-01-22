@@ -3,15 +3,18 @@ var App = new Vue({
   data() {
     return {
       money_goal: 100,
-      money_amount: 25,
-      money_discount: 50
+      money_amount: 50,
+      money_discount: 25,
+      start_time: undefined,
+      seconds_passed: 0
     }
   },
   beforeMount(){
 
   },
   mounted(){
-
+    this.loop()
+    this.start_time = Date.now()
   },
   computed: {
     getLiquidPercentage(){
@@ -36,11 +39,27 @@ var App = new Vue({
       exceeded = Math.max(0, exceeded)
       exceeded = Math.floor(exceeded)
       return exceeded
+    },
+    getTimeIndicator(){
+      return this.seconds_passed
     }
   },
   methods: {
     start(){
 
+    },
+    loop(){
+      setTimeout(function() {
+        if(!this.App.start_time){
+          this.App.start_time = Date.now();
+        }
+        let seconds_passed = (Date.now()-this.App.start_time)
+        seconds_passed = seconds_passed/1000
+        seconds_passed = Math.floor(seconds_passed)
+        this.App.seconds_passed = seconds_passed
+
+        this.App.loop();
+      }, 1)
     },
     redeem_money(){
       this.money_amount++

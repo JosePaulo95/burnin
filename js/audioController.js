@@ -9,6 +9,8 @@ beep_audios["grab"] = new Audio('audio/kenney_interfacesounds/Audio/select_002.o
 beep_audios["click"] = new Audio('audio/kenney_interfacesounds/Audio/click_003.ogg');
 beep_audios["scratch"] = new Audio('audio/kenney_interfacesounds/Audio/scratch_004.ogg');
 
+
+
 let AudioController = {
 	playSound: function (index) {
 		bg_audios[index].addEventListener('ended', function() {
