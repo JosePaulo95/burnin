@@ -5,8 +5,10 @@ var App = new Vue({
       money_goal: 100,
       money_amount: 50,
       money_discount: 25,
+
       start_time: undefined,
-      seconds_passed: 0
+      seconds_passed: 0,
+      ciclo_secs: 3
     }
   },
   beforeMount(){
