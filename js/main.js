@@ -15,16 +15,28 @@ var App = new Vue({
       workers: [
         {
           id: "0",
-          deliveries: ["d","d","d"]
+          deliveries: []
         },
         {
           id: "1",
-          deliveries: ["d"]
+          deliveries: []
         },
         {
           id: "2",
-          deliveries: ["d"]
+          deliveries: []
         },
+      ],
+
+      rest_items: [
+        {
+          src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
+        },
+        {
+          src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
+        },
+        {
+          src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
+        }
       ]
     }
   },
@@ -94,6 +106,7 @@ var App = new Vue({
       if(worker.deliveries.length > 0){
         this.money_amount += this.work_prize
         this.workers.find(w => w.id==worker.id).deliveries.pop()
+        this.workers.find(w => w.id==worker.id).last_prod_time = Date.now()
       }
     },
     updatePassedSeconds(){
@@ -129,7 +142,7 @@ var App = new Vue({
       let passed_ms = (time_a-time_b)
       let passed_seconds = passed_ms/1000
 
-      return Math.floor(passed_seconds)
+      return passed_seconds
     }
   },
 });

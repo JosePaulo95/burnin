@@ -69,14 +69,12 @@
 							</div>
 							<!-- shop container -->
 							<div class="shop-container size-1 horizontal-container">
-								<div class="centralizer-container" style="width: 8vh; height: 8vh;">
-									<img src="https://cdn-icons-png.flaticon.com/512/4856/4856718.png">
-								</div>
-								<div class="centralizer-container" style="width: 6vh; height: 6vh;">
-									<img src="https://cdn-icons-png.flaticon.com/512/616/616430.png">
-								</div>
-								<div class="centralizer-container" style="width: 6vh; height: 6vh;">
-									<img src="https://cdn-icons-png.flaticon.com/512/185/185767.png">
+								<div
+									v-for="rest_item in rest_items"
+									class="centralizer-container"
+									style="width: 7vh; height: 7vh;"
+								>
+									<img :src="rest_item.src">
 								</div>
 							</div>
 						</div>
