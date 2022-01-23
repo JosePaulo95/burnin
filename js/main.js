@@ -17,17 +17,17 @@ var App = new Vue({
         {
           id: "0",
           deliveries: [],
-          remaining_rest: 0,
+          wake_up_time: 0,
         },
         {
           id: "1",
           deliveries: [],
-          remaining_rest: 0,
+          wake_up_time: 0,
         },
         {
           id: "2",
           deliveries: [],
-          remaining_rest: 0,
+          wake_up_time: 0,
         },
       ],
 
@@ -131,10 +131,11 @@ var App = new Vue({
         if(!w.last_prod_time){
           w.last_prod_time = Date.now()//inicializa
         }
-        if(w.remaining_rest > 0){//se tiver descansando
-          w.remaining_rest -= 1
-        }else if(this.dif_time(Date.now(), w.last_prod_time) >= this.ciclo_worker){//checa ciclo
-          if(w.deliveries.length < this.max_delivery){//checa lim max
+        if(this.dif_time(Date.now(), w.last_prod_time) >= this.ciclo_worker){//checa ciclo
+          if(
+            w.deliveries.length < this.max_delivery && //checa nao passou do lim max
+            w.wake_up_time < this.passed_seconds //checa nao esta descansando
+          ){
             w.deliveries.push("d") //produz
           }
           w.last_prod_time = Date.now()//marca entrega
@@ -154,8 +155,9 @@ var App = new Vue({
     applyRest(worker){
       if(this.rest_selected){
         this.rest_selected = false
-        if(worker.remaining_rest <= 0){
-          this.workers.find(w => w.id == worker.id).remaining_rest = 3
+        if(this.passed_seconds > worker.wake_up_time){//checa se nao ta descansando
+          this.workers.find(w => w.id == worker.id).wake_up_time = this.passed_seconds+3
+          //this.workers.find(w => w.id == worker.id).deliveries.push("d");//wake_up_time = this.passed_seconds+3
         }
       }
     }
