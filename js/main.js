@@ -3,12 +3,12 @@ var App = new Vue({
   data() {
     return {
       money_goal: 100,
-      money_amount: 50,
-      money_discount: 25,
+      money_amount: 90,
+      money_discount: 5,
 
       start_time: undefined,
-      seconds_passed: 0,
-      ciclo_secs: 3
+      passed_seconds: 0,
+      ciclo_secs: 5
     }
   },
   beforeMount(){
@@ -43,7 +43,7 @@ var App = new Vue({
       return exceeded
     },
     getTimeIndicator(){
-      return this.seconds_passed
+      return this.passed_seconds
     }
   },
   methods: {
@@ -51,20 +51,34 @@ var App = new Vue({
 
     },
     loop(){
+      //if(this.App.start_time){
+
+      //}
+
       setTimeout(function() {
         if(!this.App.start_time){
           this.App.start_time = Date.now();
         }
-        let seconds_passed = (Date.now()-this.App.start_time)
-        seconds_passed = seconds_passed/1000
-        seconds_passed = Math.floor(seconds_passed)
-        this.App.seconds_passed = seconds_passed
-
+        this.App.updatePassedSeconds()
         this.App.loop();
       }, 1)
     },
     redeem_money(){
       this.money_amount++
+    },
+    updatePassedSeconds(){
+      let current_passed_seconds = (Date.now()-this.start_time)
+      current_passed_seconds = current_passed_seconds/1000
+      current_passed_seconds = Math.floor(current_passed_seconds)
+      if(current_passed_seconds != this.passed_seconds){
+        this.updatePassedCycles()
+      }
+      this.passed_seconds = current_passed_seconds
+    },
+    updatePassedCycles(){
+      if((this.passed_seconds+2)%this.ciclo_secs == 0){
+        this.money_amount -= this.money_discount
+      }
     }
-  }
+  },
 });
