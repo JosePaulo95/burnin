@@ -1,15 +1,30 @@
+const worker_levels = [
+  {
+    id: 1,
+    periodo: 3
+  },
+  {
+    id: 2,
+    periodo: 1.5
+  },
+  {
+    id: 3,
+    periodo: 0.5
+  },
+];
+
 var App = new Vue({
   el: "#app",
   data() {
     return {
       money_goal: 100,
-      money_amount: 90,
-      money_discount: 1,
-      work_prize: 5,
+      money_amount: 100,
+      money_discount: 5,
+      discount_cycle: 1,
+      work_prize: 3,
 
       start_time: undefined,
       passed_seconds: 0,
-      discount_cycle: 1,
       last_discount_time: 0,
       max_delivery: 4,
       workers: [
@@ -18,33 +33,23 @@ var App = new Vue({
           deliveries: [],
           wake_up_time: 0,
           last_prod_time: 0,
-          level: {
-            id: 1,
-            periodo: 2
-          }
+          level: undefined,
         },
         {
           id: "1",
           deliveries: [],
           wake_up_time: 0,
           last_prod_time: 0,
-          level: {
-            id: 2,
-            periodo: 2
-          }
+          level: undefined,
         },
         {
           id: "2",
           deliveries: [],
           wake_up_time: 0,
           last_prod_time: 0,
-          level: {
-            id: 3,
-            periodo: 2
-          }
+          level: undefined,
         },
       ],
-
       rest_items: [
         {
           src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
@@ -53,7 +58,9 @@ var App = new Vue({
     }
   },
   beforeMount(){
-
+    for (let i = 0; i < this.workers.length; i++) {
+      this.workers[i].level = worker_levels[0]
+    }
   },
   mounted(){
     this.loop()
@@ -135,6 +142,12 @@ var App = new Vue({
     updateMoney(){
       let next_discount_time = this.last_discount_time+this.discount_cycle
       if(this.passed_seconds > next_discount_time){
+        if(this.money_amount <= this.money_discount){
+          location.reload()
+        }
+        if(this.money_amount > this.money_goal){
+          location.reload()
+        }
         this.money_amount -= this.money_discount
         this.last_discount_time = this.passed_seconds
       }
