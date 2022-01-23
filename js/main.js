@@ -187,7 +187,7 @@ var App = new Vue({
           this.workers.find(w => w.id == worker.id).last_prod_time = this.passed_seconds+3
 
           const level_atual = worker.level.id
-          const next_level_id = Math.max(worker.level.id+1, worker_levels.length)
+          const next_level_id = Math.min(worker.level.id+1, worker_levels.length)
           const next_level = worker_levels.find(l => l.id == next_level_id)
           this.workers.find(w => w.id == worker.id).level = next_level
           //this.workers.find(w => w.id == worker.id).deliveries.push("d");//wake_up_time = this.passed_seconds+3
