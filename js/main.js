@@ -4,12 +4,14 @@ var App = new Vue({
     return {
       money_goal: 100,
       money_amount: 90,
-      money_discount: 5,
+      money_discount: 0,
       work_prize: 5,
 
       start_time: undefined,
       passed_seconds: 0,
       ciclo_secs: 3,
+      ciclo_worker: 3,
+      max_delivery: 4,
       workers: [
         {
           id: "0",
@@ -100,6 +102,7 @@ var App = new Vue({
       current_passed_seconds = Math.floor(current_passed_seconds)
       if(current_passed_seconds != this.passed_seconds){
         this.updatePassedCycles()
+        this.updateDeliveries()
       }
       this.passed_seconds = current_passed_seconds
     },
@@ -107,6 +110,26 @@ var App = new Vue({
       if((this.passed_seconds)%this.ciclo_secs == 0){
         this.money_amount -= this.money_discount
       }
+    },
+    updateDeliveries(){
+      this.workers = this.workers.map(w => {
+        if(!w.last_prod_time){
+          w.last_prod_time = Date.now()
+        }
+        if(this.dif_secs(Date.now(), w.last_prod_time) >= this.ciclo_worker){
+          if(w.deliveries.length < this.max_delivery){
+            w.deliveries.push("d")
+          }
+          w.last_prod_time = Date.now()
+        }
+        return w
+      })
+    },
+    dif_secs(time_a, time_b){
+      let passed_ms = (time_a-time_b)
+      let passed_seconds = passed_ms/1000
+
+      return Math.floor(passed_seconds)
     }
   },
 });
