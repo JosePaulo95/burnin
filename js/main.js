@@ -4,20 +4,24 @@ var App = new Vue({
     return {
       money_goal: 100,
       money_amount: 90,
-      money_discount: 0,
+      money_discount: 5,
+      work_prize: 5,
 
       start_time: undefined,
       passed_seconds: 0,
       ciclo_secs: 3,
       workers: [
         {
-          deliveries: [1,2,3]
+          id: "0",
+          deliveries: ["d","d","d"]
         },
         {
-          deliveries: [1]
+          id: "1",
+          deliveries: ["d"]
         },
         {
-          deliveries: [1]
+          id: "2",
+          deliveries: ["d"]
         },
       ]
     }
@@ -84,8 +88,11 @@ var App = new Vue({
         this.App.loop();
       }, 1)
     },
-    redeem_money(){
-      this.money_amount++
+    redeem_work(worker){
+      if(worker.deliveries.length > 0){
+        this.money_amount += this.work_prize
+        this.workers.find(w => w.id==worker.id).deliveries.pop()
+      }
     },
     updatePassedSeconds(){
       let current_passed_seconds = (Date.now()-this.start_time)
