@@ -4,36 +4,34 @@ var App = new Vue({
     return {
       money_goal: 100,
       money_amount: 90,
-      money_discount: 0,
+      money_discount: 1,
       work_prize: 5,
 
       start_time: undefined,
       passed_seconds: 0,
-      ciclo_secs: 3,
-      ciclo_worker: 3,
+      discount_cycle: 1,
+      last_discount_time: 0,
+      ciclo_worker: 1,
       max_delivery: 4,
       workers: [
         {
           id: "0",
-          deliveries: []
+          deliveries: [],
+          remaining_rest: 0,
         },
         {
           id: "1",
-          deliveries: []
+          deliveries: [],
+          remaining_rest: 0,
         },
         {
           id: "2",
-          deliveries: []
+          deliveries: [],
+          remaining_rest: 0,
         },
       ],
 
       rest_items: [
-        {
-          src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
-        },
-        {
-          src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
-        },
         {
           src: "https://cdn-icons-png.flaticon.com/512/616/616430.png"
         }
@@ -80,8 +78,8 @@ var App = new Vue({
         progress = progress > 1 ? 1 : progress;
         return Math.round(a + Math.round(b - a) * progress);
       }
-      const seconds_current_cycle = this.passed_seconds%this.ciclo_secs
-      const progress = seconds_current_cycle/this.ciclo_secs
+      const seconds_current_cycle = this.passed_seconds%this.discount_cycle
+      const progress = seconds_current_cycle/this.discount_cycle
       return lerp(0, 1, progress)
     }
   },
@@ -112,33 +110,39 @@ var App = new Vue({
     updatePassedSeconds(){
       let current_passed_seconds = (Date.now()-this.start_time)
       current_passed_seconds = current_passed_seconds/1000
-      current_passed_seconds = Math.floor(current_passed_seconds)
+      //current_passed_seconds = Math.floor(current_passed_seconds)
+      current_passed_seconds = current_passed_seconds
       if(current_passed_seconds != this.passed_seconds){
-        this.updatePassedCycles()
+        this.updateMoney()
         this.updateDeliveries()
       }
       this.passed_seconds = current_passed_seconds
     },
-    updatePassedCycles(){
-      if((this.passed_seconds)%this.ciclo_secs == 0){
+    updateMoney(){
+      let next_discount_time = this.last_discount_time+this.discount_cycle
+      if(this.passed_seconds > next_discount_time){
         this.money_amount -= this.money_discount
+        this.last_discount_time = this.passed_seconds
       }
     },
     updateDeliveries(){
+      //checa se é pra produzir e produz
       this.workers = this.workers.map(w => {
         if(!w.last_prod_time){
-          w.last_prod_time = Date.now()
+          w.last_prod_time = Date.now()//inicializa
         }
-        if(this.dif_secs(Date.now(), w.last_prod_time) >= this.ciclo_worker){
-          if(w.deliveries.length < this.max_delivery){
-            w.deliveries.push("d")
+        if(w.remaining_rest > 0){//se tiver descansando
+          w.remaining_rest -= 1
+        }else if(this.dif_time(Date.now(), w.last_prod_time) >= this.ciclo_worker){//checa ciclo
+          if(w.deliveries.length < this.max_delivery){//checa lim max
+            w.deliveries.push("d") //produz
           }
-          w.last_prod_time = Date.now()
+          w.last_prod_time = Date.now()//marca entrega
         }
         return w
       })
     },
-    dif_secs(time_a, time_b){
+    dif_time(time_a, time_b){
       let passed_ms = (time_a-time_b)
       let passed_seconds = passed_ms/1000
 
@@ -150,9 +154,8 @@ var App = new Vue({
     applyRest(worker){
       if(this.rest_selected){
         this.rest_selected = false
-        if(!worker.is_resting){
-          this.workers.find(w => w.id == worker.id).is_resting = true
-
+        if(worker.remaining_rest <= 0){
+          this.workers.find(w => w.id == worker.id).remaining_rest = 3
         }
       }
     }
