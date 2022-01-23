@@ -143,6 +143,18 @@ var App = new Vue({
       let passed_seconds = passed_ms/1000
 
       return passed_seconds
+    },
+    selectRestItem(){
+      this.rest_selected = true
+    },
+    applyRest(worker){
+      if(this.rest_selected){
+        this.rest_selected = false
+        if(!worker.is_resting){
+          this.workers.find(w => w.id == worker.id).is_resting = true
+
+        }
+      }
     }
   },
 });

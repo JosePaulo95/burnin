@@ -46,7 +46,11 @@
 								<!-- worker -->
 								<div v-for="worker in workers" class="horizontal-container worker-container">
 									<!-- worker icon -->
-									<img style="width: 7vh; height: 7vh;" src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png">
+									<img
+										v-on:click="applyRest(worker)"
+										style="width: 7vh; height: 7vh;"
+										src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png"
+									>
 									<!-- deliveries container -->
 									<div class="horizontal-container deliveries-container">
 										<!-- deliveries -->
@@ -71,6 +75,7 @@
 							<div class="shop-container size-1 horizontal-container">
 								<div
 									v-for="rest_item in rest_items"
+									v-on:click="selectRestItem(rest_item)"
 									class="centralizer-container"
 									style="width: 7vh; height: 7vh;"
 								>
