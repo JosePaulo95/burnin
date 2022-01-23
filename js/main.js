@@ -5,11 +5,11 @@ const worker_levels = [
   },
   {
     id: 2,
-    periodo: 1.5
+    periodo: 2
   },
   {
     id: 3,
-    periodo: 0.5
+    periodo: 1
   },
 ];
 
@@ -19,9 +19,9 @@ var App = new Vue({
     return {
       money_goal: 100,
       money_amount: 100,
-      money_discount: 5,
+      money_discount: 0,
       discount_cycle: 1,
-      work_prize: 3,
+      work_prize: 5,
 
       start_time: undefined,
       passed_seconds: 0,
@@ -185,7 +185,11 @@ var App = new Vue({
         if(this.passed_seconds > worker.wake_up_time){//checa se nao ta descansando
           this.workers.find(w => w.id == worker.id).wake_up_time = this.passed_seconds+3
           this.workers.find(w => w.id == worker.id).last_prod_time = this.passed_seconds+3
-          this.workers.find(w => w.id == worker.id).level.periodo = 0.5
+
+          const level_atual = worker.level.id
+          const next_level_id = Math.max(worker.level.id+1, worker_levels.length)
+          const next_level = worker_levels.find(l => l.id == next_level_id)
+          this.workers.find(w => w.id == worker.id).level = next_level
           //this.workers.find(w => w.id == worker.id).deliveries.push("d");//wake_up_time = this.passed_seconds+3
         }
       }
