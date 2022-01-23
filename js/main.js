@@ -19,7 +19,7 @@ var App = new Vue({
     return {
       money_goal: 100,
       money_amount: 100,
-      money_discount: 0,
+      money_discount: 5,
       discount_cycle: 1,
       work_prize: 5,
 
