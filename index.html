@@ -54,7 +54,14 @@
 									</div>
 									<!-- coin icon -->
 									<img
+										v-if="worker.deliveries.length > 0"
 										style="width: 5vh; height: 5vh;"
+										src="https://cdn-icons-png.flaticon.com/512/217/217853.png"
+										v-on:click="redeem_work(worker)"
+									>
+									<img
+										v-else
+										style="width: 5vh; height: 5vh; opacity: 0.5;"
 										src="https://cdn-icons-png.flaticon.com/512/217/217853.png"
 										v-on:click="redeem_work(worker)"
 									>
