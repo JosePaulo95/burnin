@@ -8,7 +8,7 @@ var App = new Vue({
 
       start_time: undefined,
       passed_seconds: 0,
-      ciclo_secs: 5
+      ciclo_secs: 3
     }
   },
   beforeMount(){
@@ -44,6 +44,16 @@ var App = new Vue({
     },
     getTimeIndicator(){
       return this.passed_seconds
+    },
+    getClockState(){
+      const lerp = (a, b, progress) => {
+        progress = progress < 0 ? 0 : progress;
+        progress = progress > 1 ? 1 : progress;
+        return Math.ceil(a + (b - a) * progress);
+      }
+      const seconds_current_cycle = this.passed_seconds%this.ciclo_secs
+      const progress = seconds_current_cycle/this.ciclo_secs
+      return lerp(0, 4, progress)
     }
   },
   methods: {
