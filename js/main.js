@@ -49,11 +49,11 @@ var App = new Vue({
       const lerp = (a, b, progress) => {
         progress = progress < 0 ? 0 : progress;
         progress = progress > 1 ? 1 : progress;
-        return Math.ceil(a + (b - a) * progress);
+        return Math.round(a + Math.round(b - a) * progress);
       }
       const seconds_current_cycle = this.passed_seconds%this.ciclo_secs
       const progress = seconds_current_cycle/this.ciclo_secs
-      return lerp(0, 4, progress)
+      return lerp(0, 1, progress)
     }
   },
   methods: {
@@ -86,7 +86,7 @@ var App = new Vue({
       this.passed_seconds = current_passed_seconds
     },
     updatePassedCycles(){
-      if((this.passed_seconds+2)%this.ciclo_secs == 0){
+      if((this.passed_seconds)%this.ciclo_secs == 0){
         this.money_amount -= this.money_discount
       }
     }
