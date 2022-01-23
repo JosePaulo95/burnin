@@ -81,7 +81,7 @@ var App = new Vue({
       const seconds_current_cycle = this.passed_seconds%this.discount_cycle
       const progress = seconds_current_cycle/this.discount_cycle
       return lerp(0, 1, progress)
-    }
+    },
   },
   methods: {
     start(){
@@ -160,6 +160,9 @@ var App = new Vue({
           //this.workers.find(w => w.id == worker.id).deliveries.push("d");//wake_up_time = this.passed_seconds+3
         }
       }
+    },
+    isResting(worker){
+      return worker.wake_up_time > this.passed_seconds
     }
   },
 });

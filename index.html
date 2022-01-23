@@ -47,9 +47,15 @@
 								<div v-for="worker in workers" class="horizontal-container worker-container">
 									<!-- worker icon -->
 									<img
+										v-if="!isResting(worker)"
 										v-on:click="applyRest(worker)"
 										style="width: 7vh; height: 7vh;"
 										src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png"
+									>
+									<img
+										v-else
+										style="width: 7vh; height: 7vh;"
+										src="https://images.emojiterra.com/google/android-11/512px/1f4a4.png"
 									>
 									<!-- deliveries container -->
 									<div class="horizontal-container deliveries-container">
