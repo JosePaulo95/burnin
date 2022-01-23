@@ -45,18 +45,29 @@
 							<div class="size-5 vertical-container" style="background-color: rgb(30,30,50);">
 								<!-- worker -->
 								<div v-for="worker in workers" class="horizontal-container worker-container">
-									<!-- worker icon -->
-									<img
-										v-if="!isResting(worker)"
-										v-on:click="applyRest(worker)"
-										style="width: 7vh; height: 7vh;"
-										src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png"
-									>
-									<img
-										v-else
-										style="width: 7vh; height: 7vh;"
-										src="https://images.emojiterra.com/google/android-11/512px/1f4a4.png"
-									>
+									<!-- worker+lvl -->
+									<div class="vertical-container">
+										<!-- worker icon -->
+										<div>
+											<img
+												v-if="!isResting(worker)"
+												v-on:click="applyRest(worker)"
+												style="width: 7vh; height: 7vh;"
+												src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png"
+											>
+											<img
+												v-else
+												style="width: 7vh; height: 7vh;"
+												src="https://images.emojiterra.com/google/android-11/512px/1f4a4.png"
+											>
+										</div>
+										<!-- descanso level -->
+										<p v-if="worker.level.id == 1" style="margin-top: -1rem; font-size: 0.5rem">⭐</p>
+										<p v-if="worker.level.id == 2" style="margin-top: -1rem; font-size: 0.5rem">⭐⭐</p>
+										<p v-if="worker.level.id == 3" style="margin-top: -1rem; font-size: 0.5rem">⭐⭐⭐</p>
+										<p v-if="worker.level.id == 4" style="margin-top: -1rem; font-size: 0.5rem">⭐⭐⭐⭐</p>
+										<!---->
+									</div>
 									<!-- deliveries container -->
 									<div class="horizontal-container deliveries-container">
 										<!-- deliveries -->

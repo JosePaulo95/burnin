@@ -11,23 +11,37 @@ var App = new Vue({
       passed_seconds: 0,
       discount_cycle: 1,
       last_discount_time: 0,
-      ciclo_worker: 1,
       max_delivery: 4,
       workers: [
         {
           id: "0",
           deliveries: [],
           wake_up_time: 0,
+          last_prod_time: 0,
+          level: {
+            id: 1,
+            periodo: 2
+          }
         },
         {
           id: "1",
           deliveries: [],
           wake_up_time: 0,
+          last_prod_time: 0,
+          level: {
+            id: 2,
+            periodo: 2
+          }
         },
         {
           id: "2",
           deliveries: [],
           wake_up_time: 0,
+          last_prod_time: 0,
+          level: {
+            id: 3,
+            periodo: 2
+          }
         },
       ],
 
@@ -131,7 +145,7 @@ var App = new Vue({
         if(!w.last_prod_time){
           w.last_prod_time = Date.now()//inicializa
         }
-        if(this.dif_time(Date.now(), w.last_prod_time) >= this.ciclo_worker){//checa ciclo
+        if(this.dif_time(Date.now(), w.last_prod_time) >= w.level.periodo){//checa se ja passou o tempo do periodo dele
           if(
             w.deliveries.length < this.max_delivery && //checa nao passou do lim max
             w.wake_up_time < this.passed_seconds //checa nao esta descansando
@@ -157,6 +171,8 @@ var App = new Vue({
         this.rest_selected = false
         if(this.passed_seconds > worker.wake_up_time){//checa se nao ta descansando
           this.workers.find(w => w.id == worker.id).wake_up_time = this.passed_seconds+3
+          this.workers.find(w => w.id == worker.id).last_prod_time = this.passed_seconds+3
+          this.workers.find(w => w.id == worker.id).level.periodo = 0.5
           //this.workers.find(w => w.id == worker.id).deliveries.push("d");//wake_up_time = this.passed_seconds+3
         }
       }
