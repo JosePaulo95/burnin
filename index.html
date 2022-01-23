@@ -44,15 +44,13 @@
 							<!-- container workers -->
 							<div class="size-5 vertical-container" style="background-color: rgb(30,30,50);">
 								<!-- worker -->
-								<div class="horizontal-container worker-container">
+								<div v-for="worker in workers" class="horizontal-container worker-container">
 									<!-- worker icon -->
 									<img style="width: 7vh; height: 7vh;" src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png">
 									<!-- deliveries container -->
 									<div class="horizontal-container deliveries-container">
 										<!-- deliveries -->
-										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
-										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
-										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
+										<img v-for="delivery in worker.deliveries" class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
 									</div>
 									<!-- coin icon -->
 									<img
@@ -60,23 +58,6 @@
 										src="https://cdn-icons-png.flaticon.com/512/217/217853.png"
 										v-on:click="redeem_money()"
 									>
-								</div>
-								<!-- worker -->
-								<div class="horizontal-container worker-container">
-									<img style="width: 7vh; height: 7vh;" src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png">
-									<div class="horizontal-container deliveries-container">
-										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
-									</div>
-									<img style="width: 5vh; height: 5vh;" src="https://cdn-icons-png.flaticon.com/512/217/217853.png">
-								</div>
-								<!-- worker -->
-								<div class="horizontal-container worker-container">
-									<img style="width: 7vh; height: 7vh;" src="https://cdn-icons-png.flaticon.com/128/3616/3616927.png">
-									<div class="horizontal-container deliveries-container">
-										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
-										<img class="elm-delivery" src="https://aux.iconspalace.com/uploads/document-icon-256-1770809698.png">
-									</div>
-									<img style="width: 5vh; height: 5vh;" src="https://cdn-icons-png.flaticon.com/512/217/217853.png">
 								</div>
 							</div>
 							<!-- shop container -->

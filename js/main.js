@@ -4,11 +4,22 @@ var App = new Vue({
     return {
       money_goal: 100,
       money_amount: 90,
-      money_discount: 5,
+      money_discount: 0,
 
       start_time: undefined,
       passed_seconds: 0,
-      ciclo_secs: 3
+      ciclo_secs: 3,
+      workers: [
+        {
+          deliveries: [1,2,3]
+        },
+        {
+          deliveries: [1]
+        },
+        {
+          deliveries: [1]
+        },
+      ]
     }
   },
   beforeMount(){
